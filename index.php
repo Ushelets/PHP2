@@ -2,8 +2,8 @@
 
 use App\Models as model;
 
-require __DIR__.'/autoload.php';
-require __DIR__.'/Templates/add.php';   
+require __DIR__ . '/autoload.php';
+require __DIR__ . '/Templates/add.php';
 
 //$dataAins =  name\Article::Insert();
 
