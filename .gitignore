@@ -349,3 +349,5 @@ healthchecksdb
 MigrationBackup/
 
 .nyc_output/
+
+.nyc_output
