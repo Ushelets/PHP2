@@ -5,6 +5,18 @@
 		}
 	],
 	"settings": {
-		"mocha.enabled": true
+		"mocha.enabled": true,
+		"sqltools.connections": [
+			{
+				"askForPassword": false,
+				"connectionTimeout": 30,
+				"database": "php2",
+				"dialect": "MySQL",
+				"name": "create-site",
+				"port": 3306,
+				"server": "127.0.0.1",
+				"username": "root"
+			}
+		]
 	}
 }

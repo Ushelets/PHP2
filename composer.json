@@ -1,0 +1,17 @@
+{
+    "name": "goldb/php2",
+    "authors": [{
+        "name": "Ushelets",
+        "email": "Goldberg7777@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "MyClasses\\": "App/"
+        }
+    },
+    "require": {
+        "twig/twig": "^2.10",
+        "twig/extensions": "^1.5",
+        "asm89/twig-cache-extension": "^1.3"
+    }
+}
