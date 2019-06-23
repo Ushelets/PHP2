@@ -2,29 +2,23 @@
 
 namespace App;
 
-class Db
+//require 'Config.php';
+
+//Config::getInstance(); // инициализация экземпляра класса для работы с БД */
+
+//class Db
+class Db extends Config
+
 {
     protected $dbh;
 
-    public function __construct()
-    //public function pdo()
-    {
-        $config = (include dirname(__DIR__, 1) . '/configs/config.php')['db'];
-        //  \PDO - означает, что PDO ищется в корневом пространстве имен
-        $this->dbh = new \PDO(
-            'mysql:host=' . $config['host'] . '; dbname=' . $config['dbname'],
-            $config['user'],
-            $config['password']
-        );
-    }
-
     public function query($sql, $class) // $class будет App\Models\Article и App\Models\User
-
     {
         //$sth = $this->dbh->prepare($sql);
         //$sth->execute($data);   //занесение данных запроса в пустой массив $data , вот для чего "$data = []"   
 
         //return  $sth->fetchAll(\PDO::FETCH_CLASS, $class);
+        //return  Config()->query($sql)->fetchAll(\PDO::FETCH_CLASS, $class);
         return  $this->dbh->query($sql)->fetchAll(\PDO::FETCH_CLASS, $class);
         //return  $this->dbh->bindValue(':table', static::TABLE, PDO::PARAM_STR)->query($sql)->fetchAll(\PDO::FETCH_CLASS, $class);
 
@@ -35,12 +29,20 @@ class Db
     public function execute($sql, $class) // $class будет App\Models\Article и App\Models\User
 
     {
+        //return  $this->dbh->Config::query($sql, \PDO::FETCH_CLASS, $class);
         return  $this->dbh->query($sql, \PDO::FETCH_CLASS, $class);
     }
+    public function execute1($sql, $data = [])
+    {
+        /* $sth = $this->dbh->Config::prepare($sql);
+        return $sth->Config::execute($data);   //занесение данных запроса в пустой массив $data , вот для чего "$data = []" */
+        $sth = $this->dbh->prepare($sql);
+        return $sth->execute($data);   //занесение данных запроса в пустой массив $data , вот для чего "$data = []"   
+    }
 
-    /* public function insAll($query)
-    {        
-        //return ($this->dbh->prepare($query))->execute();
-        return $this->dbh->query($query);        
-    } */
+    public function GetLastId()
+    {
+        //return $this->dbh->Config::lastInsertId();
+        return $this->dbh->lastInsertId();
+    }
 }

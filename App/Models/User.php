@@ -10,9 +10,4 @@ class User extends Model
 
     public $email;
     public $name;
-
-    public function GetModelName()
-    {
-        return 'Пользователь';
-    }
 }

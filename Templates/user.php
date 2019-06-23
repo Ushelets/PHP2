@@ -1,10 +1,14 @@
 <?php
+
+require __DIR__ . '/autoload.php';
+
+
 use App\Models\User;
 
 //$data = User::FindAll();
 $email = '12@mail.ru';
 $name = 'Ush';
-//$data = ( User::Ins($email, $name)) ? TRUE : FALSE;
+$data = (User::Ins($email, $name)) ? TRUE : FALSE;
 $set = 'name = "Ushka1"';
 $where = 'email = "12@mail.ru"';
 //$data = (User::Upd($set, $where)) ? TRUE : FALSE;
