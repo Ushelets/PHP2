@@ -24,30 +24,34 @@
     use App\Models\Article; ?>
     <form id="artcl_edit" action="/App/article_edit.php" method="post" enctype="multipart/form-data">
         <?php
-        $data = Article::FindAll();
+        //$data = Article::FindAll();
 
-        if ($data) {
-            krsort($data);
-            //$data_slice = array_slice($data, 0, 3);
 
-            foreach ($data as $key => $val) {
-                $id = $val->id;
-                $title = $val->title;
-                $text = $val->content;
-                $id_arr[] = $id;
-                $text_arr[] = $text;
-                $title_arr[] = $title;
-                $record[] = ['id' => $id, 'title' => $title, 'text' => $text];
+        //krsort($data);
+        //$data_slice = array_slice($data, 0, 3);
 
-                echo '
+        //foreach ($this->data['articles'] as $val) {
+
+        /** @var \App\View $this */
+
+        foreach ($this->articles as $val) {
+            $id = $val->id;
+            $title = $val->title;
+            $text = $val->content;
+            $id_arr[] = $id;
+            $text_arr[] = $text;
+            $title_arr[] = $title;
+            $record[] = ['id' => $id, 'title' => $title, 'text' => $text];
+
+            echo '
                 <label class="btn btn-primary">
                 <input type="radio" name="select[]" value="' . $title . '">
             </label>&nbsp';
 
-                echo "<a href='../Templates/article_one.php?var= $id'>" . $title . '</a>';
-                echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . mb_substr($text, 0, 70) . '...' . '</article>' . '<br>';
-            }
-        };
+            echo "<a href='../Templates/article_one.php?var= $id'>" . $title . '</a>';
+            echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . mb_substr($text, 0, 70) . '...' . '</article>' . '<br>';
+        }
+        //};
         $_SESSION['id'] = $id_arr;
         $_SESSION['text'] = $text_arr;
         $_SESSION['title'] = $title_arr;

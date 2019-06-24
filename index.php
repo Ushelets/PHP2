@@ -16,5 +16,6 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy(); */
 
-echo "<a href='../Templates/article.php'>Новости</a>  ";
+echo "<a href='../Templates/index_article.php'>Новости</a>  ";
+//echo "<a href='../Templates/article.php'>Новости</a>  ";
 echo "&nbsp&nbsp<a href='../Templates/user.php'>Пользователи</a>";
