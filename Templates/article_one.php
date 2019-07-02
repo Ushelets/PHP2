@@ -35,7 +35,7 @@ if (isset($_POST['save_chng'])) {
     echo "
 
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/article.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_article.php'>
         </head>";
     die;
 } else {

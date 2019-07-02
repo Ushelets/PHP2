@@ -1,7 +1,10 @@
 <?php
 require dirname(__DIR__, 1) . '/autoload.php';
 
-use \App\Models\Article; ?>
+use \App\Models\Article;
+//use App\Models\Author;
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -53,38 +56,47 @@ use \App\Models\Article; ?>
             <br><br>
         </form>
     <?php
-} elseif (isset($_POST['delete'])) {
+    } elseif (isset($_POST['delete'])) {
 
-    foreach ($_SESSION['record'] as $key => $value) {
-        if ($value['title'] == $_POST['select'][0]) {
-            $article = new Article;
-            $article->delete($value['id']);
+        foreach ($_SESSION['record'] as $key => $value) {
+            if ($value['title'] == $_POST['select'][0]) {
+                $article = new Article;
+                $article->delete($value['id']);
+            }
         }
-    }
-    echo "
+        echo "
 
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/article.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_article.php'>
         </head>";
-    die;
-} elseif (isset($_POST['add'])) {
-    $article = new Article;
-    $title = $_POST['h_article'];
-    $text = $_POST['article'];
-    $article->title = "$title";
-    $article->content = "$text";
-    $article->insert();
+        die;
+    } elseif (isset($_POST['add'])) {
 
-    echo "
+        foreach ($_SESSION['authors'] as $value) {
+            $author = $value['name'] . ' ' . $value['surname'];
+            if ($_POST['name_author'] == $author) {
+                $id = $value['id'];
+            }
+        }
+
+        $article = new Article;
+        $title = $_POST['h_article'];
+        $text = $_POST['article'];
+        $article->title = "$title";
+        $article->content = "$text";
+        $article->author_id = "$id";
+        $article->insert();
+
+        echo "
 
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/article.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_article.php'>
         </head>";
-    die;
-};
-echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
+        die;
+    };
+    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
 
-?>
+    ?>
 </body>
 
 </html>

@@ -14,21 +14,24 @@ class View_article implements \Countable  //?  implements \Countable - дает 
     public function __get($name)
     {
         return $this->data[$name];
+        //var_dump($this);
     }
 
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
+        //var_dump($this);
     }
 
     public function __isset($name)
     {
         return isset($this->data[$name]);
+        //var_dump($this);
     }
 
     public function display($template)
     {
-        include $template;
+        require $template;
     }
 
     public function count()

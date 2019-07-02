@@ -12,6 +12,11 @@ abstract class Model extends Db
 
     //abstract public function GetModelName(); //абстрактный метод - без тела, т.е. без реализации
 
+    /**
+     * FindAll
+     *
+     * @return void
+     */
     public static function FindAll()
     {
         $db = new Db();
@@ -28,6 +33,13 @@ abstract class Model extends Db
         //return Db::query($sql, $class);
     }
 
+    /**
+     * FindById
+     *
+     * @param  mixed $id
+     *
+     * @return void
+     */
     public static function FindById($id)
     {
         $db = new Db();
@@ -42,6 +54,14 @@ abstract class Model extends Db
         //return Db::query($sql, $class);
     }
 
+    /**
+     * Upd
+     *
+     * @param  mixed $set
+     * @param  mixed $where
+     *
+     * @return void
+     */
     public static function Upd($set, $where)
     {
         $db = new Db();
@@ -57,6 +77,14 @@ abstract class Model extends Db
         //return Db::execute($sql, $class);
     }
 
+    /**
+     * Ins
+     *
+     * @param  mixed $email
+     * @param  mixed $name
+     *
+     * @return void
+     */
     public static function Ins($email, $name)
     {
         $db = new Db();
@@ -73,6 +101,11 @@ abstract class Model extends Db
         //return Db::execute($sql, $class);
     }
 
+    /**
+     * insert
+     *
+     * @return void
+     */
     public function insert() //метод динамический - для 1 записи
     {
         $db = new Db();
@@ -100,6 +133,13 @@ abstract class Model extends Db
 
         $this->$id = $db->GetLastId();
     }
+    /**
+     * update
+     *
+     * @param  mixed $id_chng
+     *
+     * @return void
+     */
     public function update($id_chng) //метод динамический - для 1 записи
     {
         $db = new Db();
@@ -142,6 +182,13 @@ abstract class Model extends Db
         //$this->$id = Db::GetLastId();
     }
 
+    /**
+     * delete
+     *
+     * @param  mixed $id_del
+     *
+     * @return void
+     */
     public function delete($id_del) //метод динамический - для 1 записи
     {
         $db = new Db();
