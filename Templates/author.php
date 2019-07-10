@@ -43,7 +43,6 @@
                 <input type="radio" name="select[]" value="' . $name . '">
             </label>&nbsp';
 
-            //echo "<a href='../Templates/author_one.php?var= $id'>" . $name . '</a>';
             echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name . '&nbsp&nbsp' . $surname . '</article>' . '<br>';
         }
         //};

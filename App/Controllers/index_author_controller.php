@@ -5,16 +5,12 @@ namespace App\Controllers;
 use App\Controller;
 use App\Models\Author;
 
-//use App\View\View;
-//require dirname(__DIR__, 2) . '/autoload.php';
 
 class index_author_controller extends Controller
 //class index_author_controller
 {
-    public function Action()
+    public function __invoke()
     {
-        //$view = new View();
-
         $data = Author::FindAll();
 
         foreach ($data as $value) {

@@ -13,5 +13,5 @@ abstract class Controller
         $this->view = new View();
     }
 
-    abstract public function Action();
+    abstract public function __invoke(); //см. комментарии в Onenote
 }
