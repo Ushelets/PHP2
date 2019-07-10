@@ -2,7 +2,7 @@
 
 namespace App\View;
 
-class View_article implements \Countable  //?  implements \Countable - дает то, что метод count() верно подсчитывает число элементов объекта
+class View implements \Countable  //?  implements \Countable - дает то, что метод count() верно подсчитывает число элементов объекта
 {
     protected $data = [];
 

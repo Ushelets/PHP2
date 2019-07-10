@@ -38,8 +38,6 @@
             $author_id_arr[] = $author_id;
             $record[] = ['id' => $id, 'title' => $title, 'text' => $text];
 
-            //var_dump($author_id);
-
             echo '
                 <label class="btn btn-primary">
                 <input type="radio" name="select[]" value="' . $title . '">
