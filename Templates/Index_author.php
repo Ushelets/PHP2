@@ -1,8 +1,19 @@
 <?php
 
-//use App\Controllers\index_author_controller;
+require dirname(__DIR__, 1) . '/autoload.php';
 
-require dirname(__DIR__, 2) . '/autoload.php';
+/* $view = new \App\View\View();
 
-$cntrlr = new App\Controllers\index_author_controller();
+use App\Models\Author;
+
+$data = Author::FindAll();
+
+//$view->assign('articles', $data);
+$view->authors = $data;
+
+$view->display('author.php'); */
+
+use App\Controllers\index_author_controller;
+
+$cntrlr = new index_author_controller();
 $cntrlr->Action();

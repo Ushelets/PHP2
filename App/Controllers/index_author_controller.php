@@ -3,15 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\Author;
-//use App\View\View;
+use App\View\View;
 
-require dirname(__DIR__, 2) . '/autoload.php';
+//require dirname(__DIR__, 2) . '/autoload.php';
 
-class index_author_controller extends Controller
+//class index_author_controller extends Controller
+class index_author_controller
 {
     public function Action()
     {
-        //$view = new View();
+        $view = new View();
 
         $data = Author::FindAll();
 
@@ -20,8 +21,8 @@ class index_author_controller extends Controller
         }
         $_SESSION['authors'] = $authors;
 
-        $this->view->authors = $data; //вместо  $view->assign('articles', $data);
+        $view->authors = $data; //вместо  $view->assign('articles', $data);
 
-        $this->view->display(dirname(__DIR__, 2) . '/Templates/author.php');
+        $view->display(dirname(__DIR__, 2) . '/Templates/author.php');
     }
 }

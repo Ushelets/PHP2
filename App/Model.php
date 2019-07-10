@@ -46,12 +46,13 @@ abstract class Model extends Db
         //$db = Db::getInstance();
         $data = ['table' => static::TABLE];
 
-        $sql = 'SELECT * FROM ' . $data['table'] . " WHERE id = $id";
+        //$sql = 'SELECT * FROM ' . $data['table'] . " WHERE id = $id";
+        $sql = 'SELECT * FROM ' . $data['table'] . " WHERE id = :id";
 
         $class = static::class;
 
-        return $db->query($sql, $class);
-        //return Db::query($sql, $class);
+        return $db->query($sql, [':id' => $id], $class);
+        //return $db->query($sql, $class);
     }
 
     /**
