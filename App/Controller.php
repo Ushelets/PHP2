@@ -13,5 +13,21 @@ abstract class Controller
         $this->view = new View();
     }
 
-    abstract public function __invoke(); //см. комментарии в Onenote
+    protected function access(): bool
+    {
+        return true;
+        //return false;
+    }
+
+    //abstract public function __invoke(); //см. комментарии в Onenote
+    public function __invoke()
+    {
+        if ($this->access()) {
+            $this->handle();
+        } else {
+            die('Нет доступа');
+        }
+    } //см. комментарии в Onenote
+
+    abstract protected function handle();
 }
