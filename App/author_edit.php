@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__, 1) . '/autoload.php';
+require dirname(__DIR__, 1) . '/App/autoload.php';
 
 use \App\Models\Author; ?>
 <!doctype html>
@@ -53,37 +53,37 @@ use \App\Models\Author; ?>
             <br><br>
         </form>
     <?php
-} elseif (isset($_POST['delete'])) {
+    } elseif (isset($_POST['delete'])) {
 
-    foreach ($_SESSION['record'] as $key => $value) {
-        if ($value['name'] == $_POST['select'][0]) {
-            $author = new Author;
-            $author->delete($value['id']);
+        foreach ($_SESSION['record'] as $key => $value) {
+            if ($value['name'] == $_POST['select'][0]) {
+                $author = new Author;
+                $author->delete($value['id']);
+            }
         }
-    }
-    echo "
+        echo "
 
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_author.php'>
         </head>";
-    die;
-} elseif (isset($_POST['add'])) {
-    $author = new Author;
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
-    $author->name = "$name";
-    $author->surname = "$surname";
-    $author->insert();
+        die;
+    } elseif (isset($_POST['add'])) {
+        $author = new Author;
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $author->name = "$name";
+        $author->surname = "$surname";
+        $author->insert();
 
-    echo "
+        echo "
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_author.php'>
         </head>";
-    die;
-};
-echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
+        die;
+    };
+    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
 
-?>
+    ?>
 </body>
 
 </html>

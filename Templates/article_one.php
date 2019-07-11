@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__, 1) . '/autoload.php';
+require dirname(__DIR__, 1) . '/App/autoload.php';
 
 use \App\Models\Article; ?>
 

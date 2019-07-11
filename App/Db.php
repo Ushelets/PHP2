@@ -2,6 +2,8 @@
 
 namespace App;
 
+//namespace configs;
+
 //require 'Config.php';
 
 //Config::getInstance(); // инициализация экземпляра класса для работы с БД */

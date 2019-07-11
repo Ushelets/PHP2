@@ -19,7 +19,7 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <?php require dirname(__DIR__, 1) . '/autoload.php'; ?>
+    <?php require dirname(__DIR__, 1) . '/App/autoload.php'; ?>
     <form id="athr_edit" action="/App/author_edit.php" method="post" enctype="multipart/form-data">
         <?php
         //krsort($data);
