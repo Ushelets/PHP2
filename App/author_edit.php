@@ -28,21 +28,30 @@ use \App\Models\Author; ?>
         <form action="/Templates/author_one.php" method="post" enctype="multipart/form-data">
             <?php
             foreach ($_POST['select']  as $val_post) {
-                foreach ($_SESSION['name'] as $key_session => $val_session) {
+                foreach ($_SESSION['name_auth'] as $key_session => $val_session) {
                     if ($val_session == $val_post) {
                         $edt[] = $key_session;
-                        echo "<textarea name='name_author' cols='150' rows='2' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
+                        echo "<em>новое имя: </em><br> <textarea name='name_auth' cols='120' rows='1' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
                     }
                 }
 
                 foreach ($edt as $key => $value) {
-                    foreach ($_SESSION['surname'] as $key_sur => $value_sur) {
+                    foreach ($_SESSION['surname_auth'] as $key_sur => $value_sur) {
                         if ($key_sur == $value) {
-                            echo "<textarea name='surname_author' cols='150' rows='2' wrap='hard'>$value_sur</textarea>" . '<br>' . '<br>';
+                            echo "<em>новая фамилия : </em><br> <textarea name='surname_auth' cols='120' rows='1' wrap='hard'>$value_sur</textarea>" . '<br>' . '<br>';
                         }
                     }
-
-                    foreach ($_SESSION['id'] as $key_id => $value_id) {
+                    foreach ($_SESSION['email_auth'] as $key_eml => $value_eml) {
+                        if ($key_eml == $value) {
+                            echo "<em>новая электронная почта: </em><br> <textarea name='email_auth' cols='120' rows='1' wrap='hard'>$value_eml</textarea>" . '<br>' . '<br>';
+                        }
+                    }
+                    foreach ($_SESSION['password_auth'] as $key_psw => $value_psw) {
+                        if ($key_psw == $value) {
+                            echo "<em>новый пароль: </em><br> <input type='password' placeholder='new password' maxlength='50' size='120' name='password_auth'>" . '<br>' . '<br>';
+                        }
+                    }
+                    foreach ($_SESSION['id_auth'] as $key_id => $value_id) {
                         if ($key_id == $value) {
                             $_SESSION['id_chng'] = $value_id;
                         }
@@ -55,7 +64,7 @@ use \App\Models\Author; ?>
     <?php
     } elseif (isset($_POST['delete'])) {
 
-        foreach ($_SESSION['record'] as $key => $value) {
+        foreach ($_SESSION['author'] as $key => $value) {
             if ($value['name'] == $_POST['select'][0]) {
                 $author = new Author;
                 $author->delete($value['id']);
@@ -64,20 +73,25 @@ use \App\Models\Author; ?>
         echo "
 
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_author.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
         </head>";
         die;
     } elseif (isset($_POST['add'])) {
         $author = new Author;
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
+        $name = $_POST['name_auth'];
+        $surname = $_POST['surname_auth'];
+        $email = $_POST['email_auth'];
+        $password = password_hash($_POST['password_auth'], PASSWORD_DEFAULT);
+        $_SESSION['psw_auth'] = $password;
         $author->name = "$name";
         $author->surname = "$surname";
+        $author->email = "$email";
+        $author->password = "$password";
         $author->insert();
 
         echo "
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_author.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
         </head>";
         die;
     };

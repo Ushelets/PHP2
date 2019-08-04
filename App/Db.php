@@ -39,7 +39,9 @@ class Db extends Config
         /* $sth = $this->dbh->Config::prepare($sql);
         return $sth->Config::execute($data);   //занесение данных запроса в пустой массив $data , вот для чего "$data = []" */
         $sth = $this->dbh->prepare($sql);
+
         return $sth->execute($data);   //занесение данных запроса в пустой массив $data , вот для чего "$data = []"   
+
     }
 
     public function GetLastId()

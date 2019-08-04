@@ -5,10 +5,22 @@ namespace App\Controllers;
 use App\Controller;
 use App\Models\Author;
 
-
 class index_author_controller extends Controller
-//class index_author_controller
 {
+    protected function access()
+    {
+        if ($_SESSION['repeat'] == 1) {
+            $data = Author::FindAll();
+            foreach ($data as $value) {
+                if (password_verify($_SESSION['psw_auth'], $value->password)) {
+                    return  true;
+                }
+            }
+        } else {
+            return true;
+        }
+    }
+
     protected function handle()
     {
         $data = Author::FindAll();
@@ -17,6 +29,9 @@ class index_author_controller extends Controller
             $authors[] = ['name' => $value->name, 'surname' => $value->surname, 'id' => $value->id];
         }
         $_SESSION['authors'] = $authors;
+
+        $_SESSION['repeat'] = 0;
+        $_SESSION['psw_auth'] = 0;
 
         $this->view->authors = $data; //вместо  $view->assign('articles', $data);
 

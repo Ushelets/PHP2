@@ -30,7 +30,6 @@ abstract class Model extends Db
         $sql = 'SELECT * FROM ' . $data['table']; //static - поздняя компиляция, т.е. подстановка после компиляции        
 
         return $db->query($sql, $class);
-        //return Db::query($sql, $class);
     }
 
     /**
@@ -79,30 +78,6 @@ abstract class Model extends Db
     }
 
     /**
-     * Ins
-     *
-     * @param  mixed $email
-     * @param  mixed $name
-     *
-     * @return void
-     */
-    public static function Ins($email, $name)
-    {
-        $db = new Db();
-        //$db = Db::getInstance();
-
-        $data = [
-            'table' => static::TABLE,
-        ]; //static - поздняя компиляция, т.е. подстановка после компиляции
-        $sql = 'INSERT INTO ' . $data['table'] . "(`email`, `name`) VALUES ('$email','$name')";
-
-        $class = static::class;
-
-        return $db->execute($sql, $class);
-        //return Db::execute($sql, $class);
-    }
-
-    /**
      * insert
      *
      * @return void
@@ -113,7 +88,6 @@ abstract class Model extends Db
         //$db = Db::getInstance();
 
         $fields = get_object_vars($this);
-        //$fields = Db::get_object_vars($this);
 
         $cols = [];
         $data = [];
@@ -129,8 +103,8 @@ abstract class Model extends Db
 
         $sql = 'INSERT INTO ' . static::TABLE . '(' . implode(',', $cols) . ') VALUES(' . implode(',', array_keys($data)) . ')';
 
-        $db->execute1($sql, $data);
-        //Db::execute1($sql, $data);
+        $db->execute1($sql, $data); //- это динамический запрос, т.е. для 1 записи
+        //Db::execute1($sql, $data); - это статический запрос, т.е. для всех сразу записей
 
         $this->$id = $db->GetLastId();
     }

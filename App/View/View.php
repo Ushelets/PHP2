@@ -20,13 +20,11 @@ class View implements \Countable  //?  implements \Countable - дает то, ч
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
-        //var_dump($this);
     }
 
     public function __isset($name)
     {
         return isset($this->data[$name]);
-        //var_dump($this);
     }
 
     public function display($template)

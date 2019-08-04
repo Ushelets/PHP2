@@ -1,14 +1,12 @@
 <?php
 require dirname(__DIR__, 1) . '/App/autoload.php';
 
-use \App\Models\Article;
-
-?>
+use \App\Models\User; ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Редактирование новости</title>
+    <title>Редактирование пользователя</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,24 +25,33 @@ use \App\Models\Article;
     <?php
     if (isset($_POST['save'])) {
         ?>
-        <form action="/Templates/article_one.php" method="post" enctype="multipart/form-data">
+        <form action="/Templates/user_one.php" method="post" enctype="multipart/form-data">
             <?php
             foreach ($_POST['select']  as $val_post) {
-                foreach ($_SESSION['title'] as $key_session => $val_session) {
+                foreach ($_SESSION['name_usr'] as $key_session => $val_session) {
                     if ($val_session == $val_post) {
                         $edt[] = $key_session;
-                        echo "<textarea name='title_article' cols='250' rows='2' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
+                        echo "<em>новое имя: </em><br> <textarea name='name_user' cols='120' rows='1' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
                     }
                 }
 
                 foreach ($edt as $key => $value) {
-                    foreach ($_SESSION['text'] as $key_txt => $value_txt) {
-                        if ($key_txt == $value) {
-                            echo "<textarea name='text_article' cols='250' rows='10' wrap='hard'>$value_txt</textarea>" . '<br>' . '<br>';
+                    foreach ($_SESSION['surname_usr'] as $key_sur => $value_sur) {
+                        if ($key_sur == $value) {
+                            echo "<em>новая фамилия: </em> <br> <textarea name='surname_user' cols='120' rows='1'wrap='hard'>$value_sur</textarea>" . '<br>' . '<br>';
                         }
                     }
-
-                    foreach ($_SESSION['id'] as $key_id => $value_id) {
+                    foreach ($_SESSION['email_usr'] as $key_eml => $value_eml) {
+                        if ($key_eml == $value) {
+                            echo "<em>новая электронная почта: </em><br> <textarea name='email_user' cols='120' rows='1' wrap='hard'>$value_eml</textarea>" . '<br>' . '<br>';
+                        }
+                    }
+                    foreach ($_SESSION['password_usr'] as $key_psw => $value_psw) {
+                        if ($key_psw == $value) {
+                            echo "<em>новый пароль: </em><br> <input type='password' placeholder='new password' maxlength='50' size='120' name='password_usr'>" . '<br>' . '<br>';
+                        }
+                    }
+                    foreach ($_SESSION['id_usr'] as $key_id => $value_id) {
                         if ($key_id == $value) {
                             $_SESSION['id_chng'] = $value_id;
                         }
@@ -57,10 +64,10 @@ use \App\Models\Article;
     <?php
     } elseif (isset($_POST['delete'])) {
 
-        foreach ($_SESSION['article'] as $key => $value) {
-            if ($value['title'] == $_POST['select'][0]) {
-                $article = new Article;
-                $article->delete($value['id']);
+        foreach ($_SESSION['user'] as $key => $value) {
+            if ($value['name'] == $_POST['select'][0]) {
+                $user = new User;
+                $user->delete($value['id']);
             }
         }
         echo "
@@ -70,24 +77,21 @@ use \App\Models\Article;
         </head>";
         die;
     } elseif (isset($_POST['add'])) {
+        $user = new User;
+        $name = $_POST['name_usr'];
+        $surname = $_POST['surname_usr'];
+        $email = $_POST['email_usr'];
+        $password = password_hash($_POST['password_usr'], PASSWORD_DEFAULT);
+        $_SESSION['psw_usr'] = $password;
+        $_SESSION['new_usr'] = 1;
+        $user->name = "$name";
+        $user->surname = "$surname";
+        $user->email = "$email";
+        $user->password = "$password";
 
-        foreach ($_SESSION['authors'] as $value) {
-            $author = $value['name'] . ' ' . $value['surname'];
-            if ($_POST['name_author'] == $author) {
-                $id = $value['id'];
-            }
-        }
-
-        $article = new Article;
-        $title = $_POST['h_article'];
-        $text = $_POST['article'];
-        $article->title = "$title";
-        $article->content = "$text";
-        $article->author_id = "$id";
-        $article->insert();
+        $user->insert();
 
         echo "
-
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
         </head>";

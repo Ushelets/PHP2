@@ -19,6 +19,18 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <style>
+        .text {
+            text-align: center;
+        }
+    </style>
+    <div class="text">
+        <u>
+            <h2>АВТОРЫ</h2>
+        </u>
+    </div>
+    <br>
+
     <?php require dirname(__DIR__, 1) . '/App/autoload.php'; ?>
     <form id="athr_edit" action="/App/author_edit.php" method="post" enctype="multipart/form-data">
         <?php
@@ -33,40 +45,34 @@
             $id = $val->id;
             $name = $val->name;
             $surname = $val->surname;
+            $email = $val->email;
+            $password = $val->password;
             $id_arr[] = $id;
             $name_arr[] = $name;
             $surname_arr[] = $surname;
-            $record[] = ['id' => $id, 'name' => $name, 'surname' => $surname];
+            $email_arr[] = $email;
+            $password_arr[] = $password;
+            $author[] = ['id' => $id, 'name' => $name, 'surname' => $surname, 'email' => $email, 'password' => $password];
 
             echo '
                 <label class="btn btn-primary">
                 <input type="radio" name="select[]" value="' . $name . '">
             </label>&nbsp';
 
-            echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name . '&nbsp&nbsp' . $surname . '</article>' . '<br>';
+            echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name . '&nbsp&nbsp' . $surname . '&nbsp&nbsp' . $email . '</article>' . '<br>';
         }
-        //};
-        $_SESSION['id'] = $id_arr;
-        $_SESSION['name'] = $name_arr;
-        $_SESSION['surname'] = $surname_arr;
-        $_SESSION['record'] = $record;
+        $_SESSION['id_auth'] = $id_arr;
+        $_SESSION['name_auth'] = $name_arr;
+        $_SESSION['surname_auth'] = $surname_arr;
+        $_SESSION['email_auth'] = $email_arr;
+        $_SESSION['password_auth'] = $password_arr;
+        $_SESSION['author'] = $author;
 
         ?>
         <button type="submit" class="btn btn-warning" name="save">Изменить</button>
         <button type="submit" class="btn btn-danger" name="delete">Удалить</button>
     </form>
-    <br><br>
-    <form action="../App/author_edit.php" method="post" enctype="multipart/form-data">
-        <b>
-            <p>Добавить автора</p>
-        </b>
-        <textarea name="name" placeholder="имя автора" cols="150" rows="2" wrap="hard"></textarea>
-        <br><br>
-        <textarea name="surname" placeholder="фамилия автора" cols="150" rows="2" wrap="hard"></textarea>
-        <br>
-        <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
-    </form>
-
+    <br>
     <a href="../index.php"> Возврат </a>
 
 </body>

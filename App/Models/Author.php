@@ -10,4 +10,6 @@ class Author extends Model
 
     public $name;
     public $surname;
+    public $email;
+    public $password;
 }

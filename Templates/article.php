@@ -19,6 +19,23 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <style>
+        .text {
+            text-align: center;
+        }
+
+        .custom-select {
+            width: 400px;
+        }
+    </style>
+
+    <div class="text">
+        <u>
+            <h2>НОВОСТИ</h2>
+        </u>
+    </div>
+    <br>
+
     <?php require dirname(__DIR__, 1) . '/App/autoload.php'; ?>
     <form id="artcl_edit" action="/App/article_edit.php" method="post" enctype="multipart/form-data">
         <?php
@@ -53,7 +70,7 @@
         $_SESSION['id'] = $id_arr;
         $_SESSION['text'] = $text_arr;
         $_SESSION['title'] = $title_arr;
-        $_SESSION['record'] = $record;
+        $_SESSION['article'] = $record;
 
         ?>
         <button type="submit" class="btn btn-warning" name="save">Изменить</button>
@@ -64,8 +81,9 @@
         <b>
             <p>Добавить новость</p>
         </b>
+
         <div class="form-group">
-            <label for="my-select"><i>Выбор автора</i></label>
+            <label for="my-select"><i>Выбор автора: </i></label>
             <select id="my-select" class="custom-select" name="name_author">
                 <?php
                 foreach ($_SESSION['authors'] as $value) {
@@ -79,7 +97,7 @@
         </div>
 
         <textarea name="h_article" placeholder="заголовок новости" cols="250" rows="3" wrap="hard"></textarea>
-        <br><br>
+        <br>
         <textarea name="article" placeholder="новость" cols="250" rows="7" wrap="hard"></textarea>
         <br>
         <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
