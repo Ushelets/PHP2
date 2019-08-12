@@ -10,4 +10,5 @@ class Article extends Model
 
     public $title;
     public $content;
+    public $author_id;
 }

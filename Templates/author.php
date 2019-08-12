@@ -54,12 +54,15 @@
             $password_arr[] = $password;
             $author[] = ['id' => $id, 'name' => $name, 'surname' => $surname, 'email' => $email, 'password' => $password];
 
-            echo '
+            if ($id == $_SESSION['id']) {
+                echo '
                 <label class="btn btn-primary">
                 <input type="radio" name="select[]" value="' . $name . '">
             </label>&nbsp';
 
-            echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name . '&nbsp&nbsp' . $surname . '&nbsp&nbsp' . $email . '</article>' . '<br>';
+                echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name . '&nbsp&nbsp' . $surname . '&nbsp&nbsp' . $email . '</article>' . '<br>';
+                $_SESSION['id'] = 0;
+            }
         }
         $_SESSION['id_auth'] = $id_arr;
         $_SESSION['name_auth'] = $name_arr;

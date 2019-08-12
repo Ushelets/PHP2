@@ -27,7 +27,7 @@
     </style>
     <div class="text">
         <u>
-            <h2>ПОЛЬЗОВАТЕЛИ</h2>
+            <h2>АДМИНИСТРАТОРЫ</h2>
         </u>
     </div>
     <br>
@@ -35,6 +35,42 @@
     <form id="adm_edit" action="/App/admin_edit.php" method="post" enctype="multipart/form-data">
         <?php
 
+        foreach ($this->admins_adm as $val) {
+            $id_adm = $val->id;
+            $name_adm = $val->name;
+            $surname_adm = $val->surname;
+            $email_adm = $val->email;
+            $password_adm = $val->password;
+            $id_arr_adm[] = $id_adm;
+            $name_arr_adm[] = $name_adm;
+            $surname_arr_adm[] = $surname_adm;
+            $email_arr_adm[] = $email_adm;
+            $password_arr_adm[] = $password_adm;
+            $admin[] = ['id' => $id_adm, 'name' => $name_adm, 'surname' => $surname_adm, 'email' => $email_adm, 'password' => $password_adm];
+
+            echo '
+                <label class="btn btn-primary">
+                <input type="radio" name="select_adm[]" value="' . $name_adm . '">
+            </label>&nbsp';
+
+            echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name_adm . '&nbsp&nbsp' . $surname_adm . '&nbsp&nbsp' . $email_adm . '</article>' . '<br>';
+        }
+        $_SESSION['id_adm'] = $id_arr_adm;
+        $_SESSION['name_adm'] = $name_arr_adm;
+        $_SESSION['surname_adm'] = $surname_arr_adm;
+        $_SESSION['email_adm'] = $email_arr_adm;
+        $_SESSION['password_adm'] = $password_arr_adm;
+        $_SESSION['admin'] = $admin;
+        ?>
+        <br>
+        <div class="text">
+            <u>
+                <h2>ПОЛЬЗОВАТЕЛИ</h2>
+            </u>
+        </div>
+        <br>
+
+        <?php
         foreach ($this->admins_usr as $val) {
             $id_usr = $val->id;
             $name_usr = $val->name;
@@ -50,7 +86,7 @@
 
             echo '
                 <label class="btn btn-primary">
-                <input type="radio" name="select[]" value="' . $name_usr . '">
+                <input type="radio" name="select_usr[]" value="' . $name_usr . '">
             </label>&nbsp';
 
             echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name_usr . '&nbsp&nbsp' . $surname_usr . '&nbsp&nbsp' . $email_usr . '</article>' . '<br>';
@@ -86,7 +122,7 @@
 
             echo '
                 <label class="btn btn-primary">
-                <input type="radio" name="select[]" value="' . $name_auth . '">
+                <input type="radio" name="select_auth[]" value="' . $name_auth . '">
             </label>&nbsp';
 
             echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . $name_auth . '&nbsp&nbsp' . $surname_auth . '&nbsp&nbsp' . $email_auth . '</article>' . '<br>';
@@ -102,6 +138,10 @@
         <button type="submit" class="btn btn-warning" name="save">Изменить</button>
         <button type="submit" class="btn btn-danger" name="delete">Удалить</button>
     </form>
+    <br>
+    <table>
+        <td bgcolor="#ffcc00"><i><b><a href="../App/Controllers/index_article_controller.php">&nbsp&nbspПросмотр новостей&nbsp&nbsp</a></b></i></td>
+    </table>
     <br>
     <a href="../index.php"> Возврат </a>
 

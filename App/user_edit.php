@@ -73,7 +73,7 @@ use \App\Models\User; ?>
         echo "
 
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";
         die;
     } elseif (isset($_POST['add'])) {
@@ -93,11 +93,11 @@ use \App\Models\User; ?>
 
         echo "
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";
         die;
     };
-    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
+    echo '<a href="../index.php"> Возврат </a>';
 
     ?>
 </body>

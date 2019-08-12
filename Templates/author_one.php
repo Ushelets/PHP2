@@ -15,11 +15,10 @@ if (isset($_POST['save_chng'])) {
     $author->password = "$password";
     $author->update($_SESSION['id_chng']);
     echo "
-
         <head>
-            <meta http-equiv='Refresh' content='0; URL=http://PHP2/Templates/index_template.php'>
+            <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";
     die;
 }
 
-echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">Возврат</a>';
+echo '<a href="../index.php"> Возврат </a>';

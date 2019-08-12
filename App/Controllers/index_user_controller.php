@@ -13,8 +13,8 @@ class index_user_controller extends Controller
         if ($_SESSION['repeat'] == 1) {
             $data = User::FindAll();
             foreach ($data as $value) {
-                //if (password_verify($_SESSION['psw_usr'], $value->password)) {
-                if (password_verify($_POST['password_repeat'], $value->password)) {
+                if (password_verify($_SESSION['psw_usr'], $value->password)) {
+                    $_SESSION['id'] = $value->id;
                     return  true;
                 }
             }

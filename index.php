@@ -32,6 +32,26 @@
         </b>
     </div>
 
+    <form action="../App/admin_edit.php" method="post" enctype="multipart/form-data">
+        <b>
+            <u>
+                <p>Новый администратор</p>
+            </u>
+        </b>
+
+        <textarea name="name_adm" required placeholder="имя" cols="150" rows="1" wrap="hard" id=""></textarea>
+        <br>
+        <textarea name="surname_adm" required placeholder="фамилия" cols="150" rows="1" wrap="hard" id=""></textarea>
+        <br>
+        <input type="email" name="email_adm" required placeholder="e-mail" size="100">
+        <br>
+        <input type="password" name="password_adm" required placeholder="password" maxlength="50" size="50">
+        <br><br>
+        <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
+    </form>
+    <hr>
+    <br>
+
     <form action="../App/user_edit.php" method="post" enctype="multipart/form-data">
         <b>
             <u>
@@ -49,9 +69,9 @@
         <br><br>
         <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
     </form>
-
     <hr>
     <br>
+
     <form action="./App/author_edit.php" method="post" enctype="multipart/form-data">
         <b>
             <u>
@@ -77,8 +97,9 @@
         </b>
         <input type="password" placeholder="введите пароль" maxlength="50" size="50" name="password_repeat">
         <br><br>
-        <button type="submit" class="btn btn-primary" name="password_usr">Войти пользователю</button>
-        <button type="submit" class="btn btn-primary" name="password_auth">Войти автору</button>
+        <button type="submit" class="btn btn-warning" name="password_usr">Войти пользователю</button>
+        <button type="submit" class="btn btn-warning" name="password_auth">Войти автору</button>
+        <button type="submit" class="btn btn-warning" name="password_admin">Войти администратору</button>
     </form>
 
 </body>

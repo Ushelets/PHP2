@@ -7,13 +7,18 @@ use App\Models\Article;
 
 class index_article_controller extends Controller
 {
-    /* protected function access(): bool //? переопределение метода из общего контроллера Controller.php; bool - это тайп хинт для функции
+    protected function access()
     {
-            return isset($_GET['name']) && 'Вася' == $_GET['name'];
-        } */
+        return true;
+    }
     protected function handle()
     {
         $data = Article::FindAll();
+
+        foreach ($data as $value) {
+            $articles[] = ['id' => $value->id, 'title' => $value->title, 'content' => $value->content, 'author_id' => $value->author_id];
+        }
+        $_SESSION['articles'] = $articles;
 
         $this->view->articles = $data; //вместо  $view->assign('articles', $data);
 

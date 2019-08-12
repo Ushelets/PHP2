@@ -13,6 +13,7 @@ class index_author_controller extends Controller
             $data = Author::FindAll();
             foreach ($data as $value) {
                 if (password_verify($_SESSION['psw_auth'], $value->password)) {
+                    $_SESSION['id'] = $value->id;
                     return  true;
                 }
             }
