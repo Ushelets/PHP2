@@ -8,18 +8,17 @@ if (isset($_POST['save_chng'])) {
     $name = $_POST['name_usr'];
     $surname = $_POST['surname_usr'];
     $email = $_POST['email_usr'];
-    $password = $_POST['password_usr'];
+    $password = password_hash($_POST['password_usr'], PASSWORD_DEFAULT);
     $user->name = "$name";
     $user->surname = "$surname";
-    $user->email = "$email";
-    $user->password = "$password";
+    $user->email = $email;
+    $user->password = $password;
     $user->update($_SESSION['id_chng']);
-    echo "
 
+    echo "
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";
     die;
 }
-
-echo '<a href="../index.php"> Возврат </a>';
+//echo '<a href="../index.php"> Возврат </a>';

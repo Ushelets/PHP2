@@ -8,7 +8,7 @@ if (isset($_POST['save_chng'])) {
     $name = $_POST['name_auth'];
     $surname = $_POST['surname_auth'];
     $email = $_POST['email_auth'];
-    $password = $_POST['password_auth'];
+    $password = password_hash($_POST['password_auth'], PASSWORD_DEFAULT);
     $author->name = "$name";
     $author->surname = "$surname";
     $author->email = "$email";

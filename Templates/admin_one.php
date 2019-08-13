@@ -10,7 +10,7 @@ if (isset($_POST['save_chng_adm'])) {
     $name_admin = $_POST['name_admin'];
     $surname_admin = $_POST['surname_admin'];
     $email_admin = $_POST['email_admin'];
-    $password_admin = $_POST['password_admin'];
+    $password_admin = password_hash($_POST['password_admin'], PASSWORD_DEFAULT);
     $admin->name = "$name_admin";
     $admin->surname = "$surname_admin";
     $admin->email = "$email_admin";
@@ -26,7 +26,7 @@ if (isset($_POST['save_chng_adm'])) {
     $name_usr = $_POST['name_usr'];
     $surname_usr = $_POST['surname_usr'];
     $email_usr = $_POST['email_usr'];
-    $password_usr = $_POST['password_usr'];
+    $password_usr = password_hash($_POST['password_usr'], PASSWORD_DEFAULT);
     $user->name = "$name_usr";
     $user->surname = "$surname_usr";
     $user->email = "$email_usr";
@@ -42,7 +42,7 @@ if (isset($_POST['save_chng_adm'])) {
     $name_auth = $_POST['name_auth'];
     $surname_auth = $_POST['surname_auth'];
     $email_auth = $_POST['email_auth'];
-    $password_auth = $_POST['password_auth'];
+    $password_auth = password_hash($_POST['password_auth'], PASSWORD_DEFAULT);
     $author->name = "$name_auth";
     $author->surname = "$surname_auth";
     $author->email = "$email_auth";

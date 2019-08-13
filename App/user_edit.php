@@ -25,30 +25,30 @@ use \App\Models\User; ?>
     <?php
     if (isset($_POST['save'])) {
         ?>
-        <form action="/Templates/user_one.php" method="post" enctype="multipart/form-data">
-            <?php
+    <form action="/Templates/user_one.php" method="post" enctype="multipart/form-data">
+        <?php
             foreach ($_POST['select']  as $val_post) {
                 foreach ($_SESSION['name_usr'] as $key_session => $val_session) {
                     if ($val_session == $val_post) {
                         $edt[] = $key_session;
-                        echo "<em>новое имя: </em><br> <textarea name='name_user' cols='120' rows='1' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
+                        echo "<em>новое имя: </em><br> <textarea name='name_usr' cols='120' rows='1' wrap='hard'>$val_session</textarea>" . '<br><br>';
                     }
                 }
 
                 foreach ($edt as $key => $value) {
                     foreach ($_SESSION['surname_usr'] as $key_sur => $value_sur) {
                         if ($key_sur == $value) {
-                            echo "<em>новая фамилия: </em> <br> <textarea name='surname_user' cols='120' rows='1'wrap='hard'>$value_sur</textarea>" . '<br>' . '<br>';
+                            echo "<em>новая фамилия: </em> <br> <textarea name='surname_usr' cols='120' rows='1'wrap='hard'>$value_sur</textarea>" . '<br><br>';
                         }
                     }
                     foreach ($_SESSION['email_usr'] as $key_eml => $value_eml) {
                         if ($key_eml == $value) {
-                            echo "<em>новая электронная почта: </em><br> <textarea name='email_user' cols='120' rows='1' wrap='hard'>$value_eml</textarea>" . '<br>' . '<br>';
+                            echo "<em>новая электронная почта: </em><br><input type='email' name='email_usr' value='$value_eml 'size='100'>" . '<br><br>';
                         }
                     }
                     foreach ($_SESSION['password_usr'] as $key_psw => $value_psw) {
                         if ($key_psw == $value) {
-                            echo "<em>новый пароль: </em><br> <input type='password' placeholder='new password' maxlength='50' size='120' name='password_usr'>" . '<br>' . '<br>';
+                            echo "<em>новый пароль: </em><br> <input type='password' placeholder='new password' maxlength='50' size='120' name='password_usr'>" . '<br><br>';
                         }
                     }
                     foreach ($_SESSION['id_usr'] as $key_id => $value_id) {
@@ -58,9 +58,9 @@ use \App\Models\User; ?>
                     }
                 }
             } ?>
-            <button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>
-            <br><br>
-        </form>
+        <button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>
+        <br><br>
+    </form>
     <?php
     } elseif (isset($_POST['delete'])) {
 
@@ -70,8 +70,8 @@ use \App\Models\User; ?>
                 $user->delete($value['id']);
             }
         }
-        echo "
 
+        echo "
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";
