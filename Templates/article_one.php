@@ -32,6 +32,7 @@ if (isset($_POST['save_chng'])) {
     $article->title = "$title";
     $article->content = "$text";
     $article->update($_SESSION['id_chng']);
+    $_SESSION['id_news'] = 0;
     echo "
 
         <head>

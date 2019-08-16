@@ -27,13 +27,21 @@ use \App\Models\Article;
     <?php
     if (isset($_POST['save'])) {
         ?>
-        <form action="/Templates/article_one.php" method="post" enctype="multipart/form-data">
-            <?php
+    <form action="/Templates/article_one.php" method="post" enctype="multipart/form-data">
+        <?php
+
             foreach ($_POST['select']  as $val_post) {
-                foreach ($_SESSION['title'] as $key_session => $val_session) {
-                    if ($val_session == $val_post) {
-                        $edt[] = $key_session;
-                        echo "<textarea name='title_article' cols='250' rows='2' wrap='hard'>$val_session</textarea>" . '<br>' . '<br>';
+                foreach ($_SESSION['article'] as $val_session) {
+                    if ($val_session['title'] == $val_post) {
+                        if ($val_session['author_id'] == $_SESSION['id_news']) {
+                            $edt[] = $key_session;
+                            $title_news = $val_session['title'];
+                            echo "<textarea name='title_article' cols='250' rows='2' wrap='hard'>$title_news</textarea>" . '<br>' . '<br>';
+                        } else {
+                            echo 'Эта новость создана не вами!!' . '<br><br>';
+                            echo '<a href="' . $_SERVER['HTTP_REFERER'] . '" >Возврат</a>';
+                            die;
+                        }
                     }
                 }
 
@@ -50,17 +58,25 @@ use \App\Models\Article;
                         }
                     }
                 }
-            } ?>
-            <button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>
-            <br><br>
-        </form>
+            }
+
+            echo '<button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>';
+            ?>
+        <br><br>
+    </form>
     <?php
     } elseif (isset($_POST['delete'])) {
 
-        foreach ($_SESSION['article'] as $key => $value) {
+        foreach ($_SESSION['article'] as $value) {
             if ($value['title'] == $_POST['select'][0]) {
-                $article = new Article;
-                $article->delete($value['id']);
+                if ($value['author_id'] == $_SESSION['id_news']) {
+                    $article = new Article;
+                    $article->delete($value['id']);
+                } else {
+                    echo 'Эта новость создана не вами!!' . '<br><br>';
+                    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '" >Возврат</a>';
+                    die;
+                }
             }
         }
         echo "

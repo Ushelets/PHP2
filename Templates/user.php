@@ -71,7 +71,7 @@
     </form>
     <br>
     <table>
-        <td bgcolor="#ffcc00"><i><b><a href="../Templates/index_template.php?var=news">&nbsp&nbspПросмотр новостей&nbsp&nbsp</a></b></i></td>
+        <td bgcolor="#ffcc00"><i><b><a href="../Templates/index_template.php?var=news_usr">&nbsp&nbspПросмотр новостей&nbsp&nbsp</a></b></i></td>
     </table>
     <br>
     <a href="../index.php"> Возврат </a>

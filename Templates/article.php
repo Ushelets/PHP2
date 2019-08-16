@@ -40,7 +40,7 @@
     <form id="artcl_edit" action="/App/article_edit.php" method="post" enctype="multipart/form-data">
         <?php
         //$data_slice = array_slice($data, 0, 3);
-        /** @var \App\View $this */
+        /* @var \App\View $this */
 
         //foreach ($this->data['articles'] as $val) {
 
@@ -53,7 +53,7 @@
             $text_arr[] = $text;
             $title_arr[] = $title;
             $author_id_arr[] = $author_id;
-            $record[] = ['id' => $id, 'title' => $title, 'text' => $text];
+            $record[] = ['id' => $id, 'title' => $title, 'text' => $text, 'author_id' => $author_id];
 
             echo '
                 <label class="btn btn-primary">
@@ -70,13 +70,19 @@
         $_SESSION['id'] = $id_arr;
         $_SESSION['text'] = $text_arr;
         $_SESSION['title'] = $title_arr;
+        $_SESSION['author_id'] = $author_id_arr;
         $_SESSION['article'] = $record;
 
+        if ($_SESSION['news'] == 'news_auth') {
+            echo '<button type="submit" class="btn btn-warning" name="save">Изменить</button>
+        <button type="submit" class="btn btn-danger" name="delete">Удалить</button>';
+        }
         ?>
-        <button type="submit" class="btn btn-warning" name="save">Изменить</button>
-        <button type="submit" class="btn btn-danger" name="delete">Удалить</button>
     </form>
     <br><br>
+    <?php
+    if ($_SESSION['news'] == 'news_auth') {
+        ?>
     <form action="../App/article_edit.php" method="post" enctype="multipart/form-data">
         <b>
             <p>Добавить новость</p>
@@ -86,13 +92,15 @@
             <label for="my-select"><i>Выбор автора: </i></label>
             <select id="my-select" class="custom-select" name="name_author">
                 <?php
-                foreach ($_SESSION['authors'] as $value) {
-                    $name = $value['name'];
-                    $surname = $value['surname'];
+                    foreach ($_SESSION['authors'] as $value) {
+                        if ($value['id'] == $_SESSION['id_news']) {
+                            $name = $value['name'];
+                            $surname = $value['surname'];
+                        }
 
-                    echo "<option value='$name $surname'>" . $name . '&nbsp&nbsp' . $surname . "</option>";
-                }
-                ?>
+                        echo "<option value='$name $surname'>" . $name . '&nbsp&nbsp' . $surname . "</option>";
+                    }
+                    ?>
             </select>
         </div>
 
@@ -102,6 +110,9 @@
         <br>
         <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
     </form>
+    <?php
+    }
+    ?>
 
     <a href="../index.php"> Возврат </a>
 

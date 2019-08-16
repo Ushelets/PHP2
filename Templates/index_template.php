@@ -11,8 +11,14 @@ echo '$_SESSION <pre>';
 var_dump($_SESSION);
 echo '</pre>'; */
 
-
-if ($_GET['var'] == 'news') {
+if ($_GET['var'] == 'news' || $_GET['var'] == 'news_usr' || $_GET['var'] == 'news_auth') {
+    if ($_GET['var'] == 'news_usr') {
+        $_SESSION['news'] = 'news_usr';
+    } elseif ($_GET['var'] == 'news_auth') {
+        $_SESSION['news'] = 'news_auth';
+    } elseif ($_GET['var'] == 'news') {
+        $_SESSION['news'] = 'news';
+    }
     $cntrlr = 'index_article_controller';
 } elseif (isset($_POST['password_admin'])  || $_SESSION['new_admin'] == 1) {
     if (isset($_POST['password_admin'])) {

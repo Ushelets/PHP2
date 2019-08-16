@@ -14,6 +14,7 @@ class index_author_controller extends Controller
             foreach ($data as $value) {
                 if (password_verify($_SESSION['psw_auth'], $value->password)) {
                     $_SESSION['id'] = $value->id;
+                    $_SESSION['id_news'] = $value->id;
                     return  true;
                 }
             }
