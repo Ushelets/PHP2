@@ -27,43 +27,47 @@ use \App\Models\Article;
     <?php
     if (isset($_POST['save'])) {
         ?>
-    <form action="/Templates/article_one.php" method="post" enctype="multipart/form-data">
-        <?php
+        <form action="/Templates/article_one.php" method="post" enctype="multipart/form-data">
+            <?php
 
-            foreach ($_POST['select']  as $val_post) {
-                foreach ($_SESSION['article'] as $val_session) {
-                    if ($val_session['title'] == $val_post) {
-                        if ($val_session['author_id'] == $_SESSION['id_news']) {
-                            $edt[] = $key_session;
-                            $title_news = $val_session['title'];
-                            echo "<textarea name='title_article' cols='250' rows='2' wrap='hard'>$title_news</textarea>" . '<br>' . '<br>';
-                        } else {
-                            echo 'Эта новость создана не вами!!' . '<br><br>';
-                            echo '<a href="' . $_SERVER['HTTP_REFERER'] . '" >Возврат</a>';
-                            die;
+                if (!$_POST['select']) {
+                    echo 'Выберите новость для редактирования';
+                } else {
+                    foreach ($_POST['select']  as $val_post) {
+                        foreach ($_SESSION['article'] as $key_session => $val_session) {
+                            if ($val_session['title'] == $val_post) {
+                                if ($val_session['author_id'] == $_SESSION['id_news']) {
+                                    $edt[] = $key_session;
+                                    $title_news = $val_session['title'];
+                                    echo "<textarea name='title_article' cols='250' rows='2' wrap='hard'>$title_news</textarea>" . '<br>' . '<br>';
+                                } else {
+                                    echo 'Эта новость создана не вами!!' . '<br><br>';
+                                    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '" >Возврат</a>';
+                                    die;
+                                }
+                            }
+                        }
+
+                        foreach ($edt as $key => $value) {
+                            foreach ($_SESSION['text'] as $key_txt => $value_txt) {
+                                if ($key_txt == $value) {
+                                    echo "<textarea name='text_article' cols='250' rows='10' wrap='hard'>$value_txt</textarea>" . '<br>' . '<br>';
+                                }
+                            }
+
+                            foreach ($_SESSION['id'] as $key_id => $value_id) {
+                                if ($key_id == $value) {
+                                    $_SESSION['id_chng'] = $value_id;
+                                }
+                            }
                         }
                     }
+
+                    echo '<button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>';
                 }
-
-                foreach ($edt as $key => $value) {
-                    foreach ($_SESSION['text'] as $key_txt => $value_txt) {
-                        if ($key_txt == $value) {
-                            echo "<textarea name='text_article' cols='250' rows='10' wrap='hard'>$value_txt</textarea>" . '<br>' . '<br>';
-                        }
-                    }
-
-                    foreach ($_SESSION['id'] as $key_id => $value_id) {
-                        if ($key_id == $value) {
-                            $_SESSION['id_chng'] = $value_id;
-                        }
-                    }
-                }
-            }
-
-            echo '<button type="submit" class="btn btn-primary" name="save_chng">Сохранить изменения</button>';
-            ?>
-        <br><br>
-    </form>
+                ?>
+            <br><br>
+        </form>
     <?php
     } elseif (isset($_POST['delete'])) {
 

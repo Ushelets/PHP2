@@ -15,9 +15,9 @@ class index_article_controller extends Controller
     {
         $data = Article::FindAll();
 
-        foreach ($data as $value) {
+        /* foreach ($data as $value) {
             $articles[] = ['id' => $value->id, 'title' => $value->title, 'content' => $value->content, 'author_id' => $value->author_id];
-        }
+        } */
         //$_SESSION['articles'] = $articles;
 
         $this->view->articles = $data; //вместо  $view->assign('articles', $data);

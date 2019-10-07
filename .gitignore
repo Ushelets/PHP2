@@ -355,3 +355,6 @@ MigrationBackup/
 /.nyc_output/
 
 .nyc_output
+*.zip
+.vscode
+.gitignore

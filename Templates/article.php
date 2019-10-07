@@ -83,33 +83,32 @@
     <?php
     if ($_SESSION['news'] == 'news_auth') {
         ?>
-    <form action="../App/article_edit.php" method="post" enctype="multipart/form-data">
-        <b>
-            <p>Добавить новость</p>
-        </b>
+        <form action="../App/article_edit.php" method="post" enctype="multipart/form-data">
+            <b>
+                <p>Добавить новость</p>
+            </b>
 
-        <div class="form-group">
-            <label for="my-select"><i>Выбор автора: </i></label>
-            <select id="my-select" class="custom-select" name="name_author">
-                <?php
-                    foreach ($_SESSION['authors'] as $value) {
-                        if ($value['id'] == $_SESSION['id_news']) {
-                            $name = $value['name'];
-                            $surname = $value['surname'];
+            <div class="form-group">
+                <label for="my-select"><i>Выбор автора: </i></label>
+                <select id="my-select" class="custom-select" name="name_author">
+                    <?php
+                        foreach ($_SESSION['authors'] as $value) {
+                            if ($value['id'] == $_SESSION['id_news']) {
+                                $name = $value['name'];
+                                $surname = $value['surname'];
+                            }
                         }
-
                         echo "<option value='$name $surname'>" . $name . '&nbsp&nbsp' . $surname . "</option>";
-                    }
-                    ?>
-            </select>
-        </div>
+                        ?>
+                </select>
+            </div>
 
-        <textarea name="h_article" placeholder="заголовок новости" cols="250" rows="3" wrap="hard"></textarea>
-        <br>
-        <textarea name="article" placeholder="новость" cols="250" rows="7" wrap="hard"></textarea>
-        <br>
-        <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
-    </form>
+            <textarea name="h_article" placeholder="заголовок новости" cols="500" rows="3" wrap="hard"></textarea>
+            <br>
+            <textarea name="article" placeholder="новость" cols="1000" rows="7" wrap="hard"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary" name="add">Сохранить</button>
+        </form>
     <?php
     }
     ?>

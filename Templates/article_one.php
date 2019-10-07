@@ -34,7 +34,6 @@ if (isset($_POST['save_chng'])) {
     $article->update($_SESSION['id_chng']);
     $_SESSION['id_news'] = 0;
     echo "
-
         <head>
             <meta http-equiv='Refresh' content='0; URL=http://PHP2/index.php'>
         </head>";

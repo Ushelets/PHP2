@@ -102,7 +102,6 @@ abstract class Model extends Db
         }
 
         $sql = 'INSERT INTO ' . static::TABLE . '(' . implode(',', $cols) . ') VALUES(' . implode(',', array_keys($data)) . ')';
-
         $db->execute1($sql, $data); //- это динамический запрос, т.е. для 1 записи
         //Db::execute1($sql, $data); - это статический запрос, т.е. для всех сразу записей
 
