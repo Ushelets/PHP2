@@ -44,26 +44,27 @@
 
         //foreach ($this->data['articles'] as $val) {
 
-        foreach ($this->articles as $val) {
-            $id = $val->id;
-            $title = $val->title;
-            $text = $val->content;
-            $author_id = $val->author_id;
-            $id_arr[] = $id;
-            $text_arr[] = $text;
-            $title_arr[] = $title;
-            $author_id_arr[] = $author_id;
-            $record[] = ['id' => $id, 'title' => $title, 'text' => $text, 'author_id' => $author_id];
-
-            echo '
+        foreach ($this->data as $val) {
+            foreach ($val as $value) {
+                $id = $value->id;
+                $title = $value->title;
+                $text = $value->content;
+                $author_id = $value->author_id;
+                $id_arr[] = $id;
+                $text_arr[] = $text;
+                $title_arr[] = $title;
+                $author_id_arr[] = $author_id;
+                $record[] = ['id' => $id, 'title' => $title, 'text' => $text, 'author_id' => $author_id];
+                echo '
                 <label class="btn btn-primary">
                 <input type="radio" name="select[]" value="' . $title . '">
             </label>&nbsp';
-            foreach ($_SESSION['authors'] as $value) {
-                if ($value['id'] == $author_id) {
-                    echo "<a href='../Templates/article_one.php?var= $id'>" . $title . '</a>';
-                    echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . mb_substr($text, 0, 70) . '...' . '</article>';
-                    echo "<i><small>" . $value['name'] . '&nbsp&nbsp' . $value['surname'] .  "</small></i>" . '<br>' . '<br>';
+                foreach ($_SESSION['authors'] as $value) {
+                    if ($value['id'] == $author_id) {
+                        echo "<a href='../Templates/article_one.php?var= $id'>" . $title . '</a>';
+                        echo '<article style = "border: 1px dotted darkgrey; margin-bottom: 5px;">' . mb_substr($text, 0, 70) . '...' . '</article>';
+                        echo "<i><small>" . $value['name'] . '&nbsp&nbsp' . $value['surname'] .  "</small></i>" . '<br>' . '<br>';
+                    }
                 }
             }
         }

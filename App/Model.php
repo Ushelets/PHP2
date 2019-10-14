@@ -32,6 +32,30 @@ abstract class Model extends Db
         return $db->query($sql, $class);
     }
 
+    //public static function FindEach($cnt)
+    public static function FindEach()
+    {
+        $db = new Db();
+        $class = static::class; //static - поздняя компиляция, т.е. подстановка после компиляции        
+        $data = ['table' => static::TABLE];
+        //$sql = 'SELECT @i:=@i+1 num, id, title, content, author_id  FROM ' . $data['table'] . ', (SELECT @i:=0) X ' . "ORDER BY id";
+        $sql = 'SELECT * FROM ' . $data['table'];
+        foreach ($db->queryEach($sql, $class) as $value) {
+            return $value;
+        }
+    }
+
+    public static function CountRows()
+    {
+        $db = new Db();
+        $class = static::class; //static - поздняя компиляция, т.е. подстановка после компиляции        
+        $data = ['table' => static::TABLE];
+        $sql = 'SELECT SQL_NO_CACHE COUNT(*) as cnt FROM ' . $data['table'];
+        //$row = $db->CntRow($sql, $class);
+        $row = $db->cntRow($sql, $class);
+        return $row->cnt;
+    }
+
     /**
      * FindById
      *
